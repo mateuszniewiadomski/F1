@@ -1,0 +1,66 @@
+﻿@model IEnumerable<F1.Models.Team>
+
+@{
+    ViewData["Title"] = "Teams";
+}
+
+<h1>Teams</h1>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <p>
+        <a type="button" class="btn btn-success" asp-action="Create">New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConstructorName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="align-middle">
+                <img src="@Url.Content(item.PhotoLink)" alt="" height="50">
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.TeamName)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.ConstructorName)
+            </td>
+            <td class="align-middle">
+                <img src="@Url.Content(item.Nationality.PhotoLink)" alt="" height="15">
+                @Html.DisplayFor(modelItem => item.Nationality.NationName)
+            </td>
+            <td class="align-middle">
+                <a type="button" class="btn btn-primary" asp-action="Drivers" asp-route-id="@item.ID">Drivers in team</a>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                }
+                <a type="button" class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

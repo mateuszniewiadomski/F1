@@ -1,0 +1,66 @@
+﻿@model F1.Models.RacingDriver
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>RacingDriver</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"></label>
+                <input asp-for="Firstname" class="form-control" />
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lastname" class="control-label"></label>
+                <input asp-for="Lastname" class="form-control" />
+                <span asp-validation-for="Lastname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartNumber" class="control-label"></label>
+                <input asp-for="StartNumber" class="form-control" />
+                <span asp-validation-for="StartNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CareerWins" class="control-label"></label>
+                <input asp-for="CareerWins" class="form-control" />
+                <span asp-validation-for="CareerWins" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DateOfBirth" class="control-label"></label>
+                <input asp-for="DateOfBirth" class="form-control" />
+                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoLink" class="control-label"></label>
+                <input asp-for="PhotoLink" class="form-control" />
+                <span asp-validation-for="PhotoLink" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NationalityID" class="control-label"></label>
+                <select asp-for="NationalityID" class ="form-control" asp-items="ViewBag.NationalityID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TeamID" class="control-label"></label>
+                <select asp-for="TeamID" class ="form-control" asp-items="ViewBag.TeamID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

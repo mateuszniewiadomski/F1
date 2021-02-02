@@ -1,0 +1,57 @@
+﻿@model IEnumerable<F1.Models.RacingDriver>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Firstname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lastname)
+                </th>
+                <th>Number</th>
+                <th>Wins</th>
+                <th>Age</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nationality)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Team)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Firstname)
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.Lastname)
+                    </td>
+                    <td style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align: right;" class="align-middle">
+                        <emoji-helper emoji-helper-value="item.StartNumber"></emoji-helper>
+                    </td>
+                    <td class="align-middle">
+                        @Html.DisplayFor(modelItem => item.CareerWins)
+                    </td>
+                    <td class="align-middle">
+                        <age-helper age-helper-value="item.DateOfBirth"></age-helper>
+                    </td>
+                    <td class="align-middle">
+                        <img src="@Url.Content(item.Nationality.PhotoLink)" alt="" height="15">
+                        @Html.DisplayFor(modelItem => item.Nationality.NationName)
+                    </td>
+                    <td class="align-middle">
+                        <img src="@Url.Content(item.Team.PhotoLink)" alt="" height="15">
+                        @Html.DisplayFor(modelItem => item.Team.TeamName)
+                    </td>
+                    <td style="color: white;">
+                        <a type="button" class="btn btn-primary" @Html.ActionLink("Details", "Details", "RacingDrivers", new { id = item.ID }, null)></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

@@ -1,0 +1,15 @@
+﻿@model F1.Models.Team
+
+<div>
+
+    <img src="@Url.Content(Model.PhotoLink)" alt="" height="200">
+    <h3>Team info</h3>
+    <p>
+        <span>Name:</span>
+        @Html.DisplayFor(modelItem => Model.TeamName)<br />
+        <span>Constructor:</span>
+        @Html.DisplayFor(modelItem => Model.ConstructorName)<br />
+        <br />
+        <a type="button" class="btn btn-primary" @Html.ActionLink("Full details", "Details", "Teams", new { id = Model.ID }, null) </a>
+    </p>
+</div>

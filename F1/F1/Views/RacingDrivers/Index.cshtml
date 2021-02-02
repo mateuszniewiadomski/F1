@@ -1,0 +1,83 @@
+﻿@model IEnumerable<F1.Models.RacingDriver>
+
+@{
+    ViewData["Title"] = "Racing Drivers";
+}
+
+<h1>Racing Drivers</h1>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <p>
+        <a type="button" class="btn btn-success" asp-action="Create">New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Firstname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lastname)
+            </th>
+            <th>Number</th>
+            <th>Wins</th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfBirth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Team)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td class="align-middle">
+                <img src="@Url.Content(item.PhotoLink)" alt="" height="50">
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.Firstname)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.Lastname)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.StartNumber)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.CareerWins)
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td class="align-middle">
+                <img src="@Url.Content(item.Nationality.PhotoLink)" alt="" height="15">
+                @Html.DisplayFor(modelItem => item.Nationality.NationName)
+            </td>
+            <td class="align-middle">
+                <img src="@Url.Content(item.Team.PhotoLink)" alt="" height="15">
+                @Html.DisplayFor(modelItem => item.Team.TeamName)
+            </td>
+            <td class="align-middle" style="width: 250px;">
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                }
+                <a type="button" class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

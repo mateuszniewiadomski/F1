@@ -1,0 +1,16 @@
+﻿@model F1.Models.RacingDriver
+
+<div>
+        <img src="@Url.Content(Model.PhotoLink)" alt="" height="400">
+        <h3>Driver info</h3>
+        <p>
+            <span>Name:</span>
+            @Html.DisplayFor(modelItem => Model.Firstname)
+            <span>@Html.DisplayFor(modelItem => Model.Lastname)</span><br />
+            <span>Age:</span>
+            <age-helper age-helper-value="Model.DateOfBirth"></age-helper>
+            <br />
+            <br />
+            <a type="button" class="btn btn-primary" @Html.ActionLink("Full details", "Details", "RacingDrivers", new { id = Model.ID }, null) </a>
+        </p>
+</div>

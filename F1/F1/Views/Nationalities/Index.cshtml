@@ -1,0 +1,57 @@
+﻿@model IEnumerable<F1.Models.Nationality>
+
+@{
+    ViewData["Title"] = "Nationalities";
+}
+
+<h1>Nationalities</h1>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <p>
+        <a type="button" class="btn btn-success" asp-action="Create">New</a>
+    </p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Flag</th>
+            <th>
+                @Html.DisplayNameFor(model => model.NationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CapitalCity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="align-middle">
+                    <img src="@Url.Content(item.PhotoLink)" alt="" height="30">
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.NationName)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.CapitalCity)
+                </td>
+                <td>
+                    <a type="button" class="btn btn-primary" asp-action="Teams" asp-route-id="@item.ID">Teams from country</a>
+                    <a type="button" class="btn btn-primary" asp-action="Drivers" asp-route-id="@item.ID">Drivers from country</a>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <a type="button" class="btn btn-success" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                    }
+                    <a type="button" class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <a type="button" class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
